@@ -89,7 +89,7 @@ void insert_Custom(LList *L ,Node *q,Data x){
 }
 Node* searchNode(LList L,char name[30]){
 	Node *pp = L.pHead;
-	while(pp != NULL && !strstr(pp->infor.hoten,name)){
+	while(pp != NULL && !strstr(pp->infor.hoten,name) == NULL){
 		pp = pp->link;
 	}
 	return pp;
@@ -105,7 +105,7 @@ void insert_Tail(LList *L ,Data x){
 		L->pTail = pp;
 	}
 	else{
-		L->pTail -> link = pp; // dia chi tiep theo cua node pTail la pp 
+		L->pTail->link = pp; // dia chi tiep theo cua node pTail la pp 
 		L->pTail = pp;// cap nhat dia chi pTail trong danh sach thanh node cuoi cung cua hien tai
 	}
 	L->spt++;
@@ -192,6 +192,7 @@ int main(){
 	Data x;
 	initList(&L); //tao ra 1 ds rong
 	LList L1,L2;
+	printf("Nhap vao ten can tim\n");
 	char name[30];
 	scanf("%s",name);
 	Node *q;
@@ -241,16 +242,20 @@ int main(){
 	        	printf("Tach mot danh sach thanh hai danh sach\n");
 					        	
 	        	tach(L,&L1,&L2);
+	        	break;
 	        case 6:
 	        	printf("Ghep mot danh sach thanh hai danh sach\n");
 
 	        	ghep(L1,L2,&L);
+	        	break;
 	        case 7:
 	        	printf("Xoa node dau cua danh sach\n");
 	        	del_Head(&L);
+	        	break;
 	        case 8:
 	        	printf("Xoa node tu chon cua danh sach\n");
 	        	del_After(&L,q);
+	        	break;
             case 9:	 
                 processList(L);
                 break;    
