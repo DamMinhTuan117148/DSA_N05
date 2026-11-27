@@ -77,7 +77,8 @@ void insert_Custom(LList *L ,Node *q,Data x){
 	Node *pp;
 	pp = (Node *) malloc(sizeof(Node));
 	pp->infor = x;
-	pp->link = NULL;
+	pp->next = NULL;
+	pp->prev = NULL;
 	if(emptyList(*L)){
 		L->pHead = pp;
 		L->pTail = pp;
@@ -93,7 +94,7 @@ void insert_Custom(LList *L ,Node *q,Data x){
 Node* searchNode(LList L,char name[30]){
 	Node *pp = L.pHead;
 	while(pp != NULL && !strstr(pp->infor.hoten,name) == NULL){
-		pp = pp->link;
+		pp = pp->next;
 	}
 	return pp;
 }
@@ -102,7 +103,8 @@ void insert_Tail(LList *L ,Data x){
 	Node *pp;
 	pp = (Node *) malloc(sizeof(Node));
 	pp->infor = x;
-	pp->link = NULL;
+	pp->next = NULL;
+	pp->prev = NULL;
 	if(emptyList(*L)){
 		L->pHead = pp;
 		L->pTail = pp;
@@ -120,7 +122,7 @@ void chen_tang(LList *L,Data x){
 	Node *pp = L->pHead,*q;
 	while(pp != NULL && pp->infor.masv <x.masv){
 		q = pp;
-		pp = pp -> link;
+		pp = pp -> next;
 	}
 	if(pp == L->pHead){
 		insert_Head(L,x);
@@ -141,7 +143,7 @@ void tach(LList L , LList *L1, LList *L2){
 		else{
 			insert_Head(L2,pp->infor);
 		}
-		pp = pp->link;
+		pp = pp->next;
 	}
 }
 ////////////////////////////////////////////////
@@ -153,8 +155,8 @@ void ghep(LList L1,LList L2,LList *L){
 		while(p1 != NULL){
 			insert_Head(L,p1->infor);
 			insert_Head(L,p2->infor);
-			p1=p1->link;
-			p2=p2->link;
+			p1=p1->next;
+			p2=p2->next;
 		}
 	}
 }
@@ -186,7 +188,7 @@ void del_After(LList *L, Node *q){
 	else{
 		pp = q->next;
 		q->next = pp->next;
-		if(pp-next != NULL){
+		if(pp->next != NULL){
 			pp->next->prev =q;
 		}
 		free(pp);
